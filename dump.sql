@@ -9,5 +9,5 @@ create table produtos (
     id serial primary key,
     nome text not null,
     descricao text,
-    valor integer not null,
+    valor integer not null
 );
