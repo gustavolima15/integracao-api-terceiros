@@ -1,9 +1,13 @@
+const instanciaAxios = require("../api");
 const pool = require("../conexao");
 
 const venda = async(req, res) => {
     const {cliente_id, produto_id, quantidade} = req.body;
 
     try {
+        const { data: saldo } = await instanciaAxios.get('/balance')
+        
+        return res.json(saldo)
         const cliente = await pool.query('select * from clientes where id = $1', [cliente_id]);
 
         if(cliente.rowCount < 1) {
