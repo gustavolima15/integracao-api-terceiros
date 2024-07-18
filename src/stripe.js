@@ -1,18 +1,10 @@
 const instanciaAxios = require("./api");
 const qs = require('qs');
 
-const card = {
-    card: {
-        number: "123...",
-        exp_mounth: 12,
-        exp_year: 2829,
-        cvc: 123
-    }
-}
 
 const criarToken = async (card) => {
     const dadosCartao = qs.stringify(card)    
-    const { data: tokenCartao } = await instanciaAxios.post('/tokens');
+    const { data: tokenCartao } = await instanciaAxios.post('/tokens', dadosCartao);
 
     return tokenCartao;
 
@@ -27,4 +19,9 @@ const cobrar = async (amount, tokenCartao) => {
     const { data: cobranca } = await instanciaAxios.post('./charges', dadosCobranca);
 
     return cobranca;
+}
+
+module.exports = {
+    criarToken,
+    cobrar
 }
